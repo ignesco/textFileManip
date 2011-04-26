@@ -1,0 +1,104 @@
+##* Copyright (c) 1999-2006,2007, Craig S. Harrison
+##*
+##* All rights reserved.
+##*
+##* This program is free software; you can redistribute it and/or
+##* modify it under the terms of the GNU General Public License
+##* as published by the Free Software Foundation; either version 2
+##* of the License, or (at your option) any later version.
+##*
+##* This program is distributed in the hope that it will be useful,
+##* but WITHOUT ANY WARRANTY; without even the implied warranty of
+##* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##* GNU General Public License for more details.
+##*
+##* You should have received a copy of the GNU General Public License
+##* along with this program; if not, write to the Free Software
+##* Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
+SOURCE FILE:DIRECT "test1.txt";
+##Testing INIT NV
+	INIT NV:0,0;
+	ASSERT NV 0:0;
+	INIT NV:0,5;
+	ASSERT NV 0:5;
+##Testing ADJUST + & -
+	INIT NV:0,5;
+	ADJUST 0+1;
+	ASSERT NV 0:6;
+	ADJUST 0-2;
+	ASSERT NV 0:4;
+##Testing ITOSV
+	INIT NV:0,54732;
+	ITOSV:0,0;
+	ASSERT SV 0:"54732";
+	INIT NV:0,54730;
+	ITOSV:0,0;
+	ASSERT SV 0:"54730";
+##Testing EXTRACT
+	INIT NV:0,0;
+	INIT NV:1,1;
+	EXTRACT:0,1,0;
+	ASSERT SV 0:"te";
+	INIT NV:0,1;
+	INIT NV:1,9;
+	EXTRACT:0,1,0;
+	ASSERT SV 0:"est1strin";
+##Testing SWAP
+	INIT NV:0,0;
+	INIT NV:1,1;
+	ASSERT NV 0:0;
+	ASSERT NV 1:1;
+	SWAP 0,1;
+	ASSERT NV 1:0;
+	ASSERT NV 0:1;
+##Test INDFIND DQSTR
+	INIT NV :0,0;
+	INDFIND :"est1str",0,0;
+	ASSERT NV 0:1;
+	INIT NV :0,0;
+	INDFIND :"st1str",0,0;
+	ASSERT NV 0:2;
+	INIT NV :0,0;
+	INDFIND :"sXt1str",0,0;
+	ADJUST 0+1;
+	ASSERT NV 0:0;
+##Test INDFIND SQSTR
+	INIT NV :0,0;
+	INDFIND :'est1str',0,0;
+	ASSERT NV 0:1;
+	INIT NV :0,0;
+	INDFIND :'st1str',0,0;
+	ASSERT NV 0:2;
+	INIT NV :0,0;
+	INDFIND :'sXt1str',0,0;
+	ADJUST 0+1;
+	ASSERT NV 0:0;
+##Testing REPLACE ALL DQSTR
+	REPLACE ALL :"test","XX",0;
+	STRIP SV 0, TAIL WHITESPACE ;
+	ASSERT SV 0:"XX1string1";
+	REPLACE ALL :"est","XX",0;
+	STRIP SV 0, TAIL WHITESPACE ;
+	ASSERT SV 0:"tXX1string1";
+	REPLACE ALL :"ing1","XX",0;
+	STRIP SV 0, TAIL WHITESPACE ;
+	ASSERT SV 0:"test1strXX";
+##Testing REPLACE ALL SQSTR
+	REPLACE ALL :'test','XX',0;
+	STRIP SV 0, TAIL WHITESPACE ;
+	ASSERT SV 0:"XX1string1";
+	REPLACE ALL :'est','XX',0;
+	STRIP SV 0, TAIL WHITESPACE ;
+	ASSERT SV 0:"tXX1string1";
+	REPLACE ALL :'ing1','XX',0;
+	STRIP SV 0, TAIL WHITESPACE ;
+	ASSERT SV 0:"test1strXX";
+##Testing REPLACE BLANK
+	REPLACE BLANK:"test",0;
+	STRIP SV 0, TAIL WHITESPACE ;
+	ASSERT SV 0:"1string1";
+	REPLACE BLANK:"est",0;
+	STRIP SV 0, TAIL WHITESPACE ;
+	ASSERT SV 0:"t1string1";
+PRINT "Tests Suceeded";
+PRINT NEWLINE;
