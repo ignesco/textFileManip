@@ -21,9 +21,9 @@ FIRSTTARGET:textFileManip:
 SOURCEFILE:textFileManip:main.cpp:
 SOURCEFILE:textFileManip:../Core/XX_CSHStringType.cpp:
 SOURCEFILE:textFileManip:../Core/CSHMemDebug.cpp:
-SOURCEFILE:textFileManip:../tokeniserFiles/standardTokens.cpp:
+SOURCEFILE:textFileManip:../tokeniserCore/standardTokens.cpp:
 INCLUDEDIR:.:
 INCLUDEDIR:../Core:
 INCLUDEDIR:../Core/CSHLocalTypes:
-INCLUDEDIR:../tokeniserFiles:
+INCLUDEDIR:../tokeniserCore:
 LIBRARY:textFileManip:.:stdc++:
